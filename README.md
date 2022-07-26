@@ -1,5 +1,5 @@
-# Medicaid
-Replication package for "Medicaid Eligibility &amp; Mortality: Evidence from the Affordable Care Act"
+# Medicaid Eligibility & Mortality
+This repository contains the datasets, code, and exhibits for "Medicaid Eligibility & Mortality: Evidence from the Affordable Care Act," an undergraduate thesis submitted by the author in compliance with the programme regulations of the BSc Econometrics and Mathematical Economics at the London School of Economics.
 
 ABSTRACT: Low levels of health insurance coverage have occupied a central role in policymakers’
 efforts to explain the United States’ comparatively poor health outcomes. However,
