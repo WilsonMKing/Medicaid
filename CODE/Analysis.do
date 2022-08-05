@@ -5,7 +5,6 @@
 /* 
 
 By: Wilson King
-Last Updated: 4 May 2022
 
 This .do file conducts the analysis associated with "Medicaid Eligibility 
 and Mortality: Evidence from the Affordable Care Act."
