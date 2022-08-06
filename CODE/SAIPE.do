@@ -2,9 +2,7 @@
 *************** Small Area Income and Poverty Estimates **************
 **********************************************************************
 
-global user "wilsonking"
-global root "/Users/$user/Documents/Github/Medicaid"
-cd "$root/RAW DATA/"
+cd "$root_data"
 
 * Import Datasets
 
@@ -182,12 +180,10 @@ drop CILowerBound CIUpperBound I J L M O P R S U V X Y AA AB AD AE
 save "SAIPE_19"
 clear
 
-global SAIPE "SAIPE_08 SAIPE_09 SAIPE_10 SAIPE_11 SAIPE_12 SAIPE_13 SAIPE_14 SAIPE_15 SAIPE_16 SAIPE_17 SAIPE_18 SAIPE_19"
-
 * Clean Dataset
 
 	* Drop Notes and Rename/Drop/Destring Variables
-foreach dataset of global SAIPE {
+foreach dataset in SAIPE_08 SAIPE_09 SAIPE_10 SAIPE_11 SAIPE_12 SAIPE_13 SAIPE_14 SAIPE_15 SAIPE_16 SAIPE_17 SAIPE_18 SAIPE_19 {
 	use `dataset'
 		* Rename Variables
 	rename StateFIPS state_fips
@@ -216,7 +212,19 @@ foreach dataset of global SAIPE {
 	replace county = "Sitka City and Borough" if county == "Sitka Borough"
 	replace county = "Kusilvak Census Area" if county == "Wade Hampton Census Area"
 	replace county = "Yakutat City and Borough" if county == "Yakutat Borough"
-	drop if inlist(county, "Bedford city", "Skagway Municipality", "Prince of Wales-Hyder Census Area", "Prince of Wales-Outer Ketchikan Census Area", "Skagway-Hoonah-Angoon Census Area", "Hoonah-Angoon Census Area") | inlist(county, "Skagway Municipality", "Petersburg Borough", "Petersburg Census Area", "Wrangell-Petersburg Census Area", "Wrangell City and Borough", "Wrangell Borough/city", "Petersburg Borough/Census Area")
+	drop if county == "Bedford city"
+	drop if county == "Kalawao County"
+	drop if county == "Skagway Municipality"
+	drop if county == "Prince of Wales-Hyder Census Area"
+	drop if county == "Prince of Wales-Outer Ketchikan Census Area"
+	drop if county == "Skagway Hoonah-Angoon Census Area"
+	drop if county == "Hoonah-Angoon Census Area"
+	drop if county == "Petersburg Borough"
+	drop if county == "Petersburg Census Area"
+	drop if county == "Wrangell-Petersburg Census Area"
+	drop if county == "Wrangell City and Borough"
+	drop if county == "Wrangell Borough/city"
+	drop if county == "Petersburg Borough/Census Area"
 		* Drop Extraneous Variables
 	drop PovertyEstimateAge04
 	drop PovertyPercentAge04
@@ -232,5 +240,5 @@ foreach dataset of global SAIPE {
 
 use "SAIPE_08"
 append using "SAIPE_09" "SAIPE_10" "SAIPE_11" "SAIPE_12" "SAIPE_13" "SAIPE_14" "SAIPE_15" "SAIPE_16" "SAIPE_17" "SAIPE_18" "SAIPE_19"
-save "SAIPE"
+save "$root_final/SAIPE"
 clear

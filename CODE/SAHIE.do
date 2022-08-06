@@ -2,17 +2,19 @@
 **************** Small Area Health Insurance Estimates ***************
 **********************************************************************
 
+cd "$root_data"
+
 * Import Datasets
 
 
-foreach year of 08 09 10 11 12 13 14 17 18 19 {
+foreach year in 08 09 10 11 12 13 14 17 18 19 {
 	import delimited "sahie20`year'", encoding(ISO-8859-9)
 	drop version v26
 	save "SAHIE_20`year'"
 	clear
 }
 
-foreach year of 15 16 {
+foreach year in 15 16 {
 	import delimited "sahie20`year'", encoding(ISO-8859-9)
 	drop v26
 	save "SAHIE_20`year'"
@@ -50,7 +52,19 @@ replace county = "Yakutat City and Borough" if county == "Yakutat Borough"
 replace county = "LaGrange County" if county == "Lagrange County"
 replace county = "LaSalle Parish" if county == "La Salle Parish"
 replace county = "LaSalle County" if county == "La Salle County" & state == "Illinois"
-drop if inlist(county, "Bedford city", "Skagway Municipality", "Prince of Wales-Hyder Census Area", "Prince of Wales-Outer Ketchikan Census Area", "Skagway-Hoonah-Angoon Census Area", "Hoonah-Angoon Census Area", "Skagway Municipality", "Petersburg Borough", "Petersburg Census Area") | inlist(county, "Wrangell-Petersburg Census Area", "Wrangell City and Borough", "Wrangell Borough/city", "Petersburg Borough/Census Area"
+drop if county == "Bedford city"
+drop if county == "Kalawao County"
+drop if county == "Skagway Municipality"
+drop if county == "Prince of Wales-Hyder Census Area"
+drop if county == "Prince of Wales-Outer Ketchikan Census Area"
+drop if county == "Skagway Hoonah-Angoon Census Area"
+drop if county == "Hoonah-Angoon Census Area"
+drop if county == "Petersburg Borough"
+drop if county == "Petersburg Census Area"
+drop if county == "Wrangell-Petersburg Census Area"
+drop if county == "Wrangell City and Borough"
+drop if county == "Wrangell Borough/city"
+drop if county == "Petersburg Borough/Census Area"
 	* Save Dataset
 	save "`dataset'_ALL"
 	clear
@@ -88,7 +102,19 @@ replace county = "Yakutat City and Borough" if county == "Yakutat Borough"
 replace county = "LaGrange County" if county == "Lagrange County"
 replace county = "LaSalle Parish" if county == "La Salle Parish"
 replace county = "LaSalle County" if county == "La Salle County" & state == "Illinois"
-drop if inlist(county, "Bedford city", "Skagway Municipality", "Prince of Wales-Hyder Census Area", "Prince of Wales-Outer Ketchikan Census Area", "Skagway-Hoonah-Angoon Census Area", "Hoonah-Angoon Census Area", "Skagway Municipality", "Petersburg Borough", "Petersburg Census Area") | inlist("Wrangell-Petersburg Census Area", "Wrangell City and Borough", "Wrangell Borough/city", "Petersburg Borough/Census Area")
+drop if county == "Bedford city"
+drop if county == "Kalawao County"
+drop if county == "Skagway Municipality"
+drop if county == "Prince of Wales-Hyder Census Area"
+drop if county == "Prince of Wales-Outer Ketchikan Census Area"
+drop if county == "Skagway Hoonah-Angoon Census Area"
+drop if county == "Hoonah-Angoon Census Area"
+drop if county == "Petersburg Borough"
+drop if county == "Petersburg Census Area"
+drop if county == "Wrangell-Petersburg Census Area"
+drop if county == "Wrangell City and Borough"
+drop if county == "Wrangell Borough/city"
+drop if county == "Petersburg Borough/Census Area"
 	* Save Dataset
 	save "`dataset'_200"
 	clear
@@ -126,7 +152,19 @@ replace county = "Yakutat City and Borough" if county == "Yakutat Borough"
 replace county = "LaGrange County" if county == "Lagrange County"
 replace county = "LaSalle Parish" if county == "La Salle Parish"
 replace county = "LaSalle County" if county == "La Salle County" & state == "Illinois"
-drop if inlist(county, "Bedford city", "Skagway Municipality", "Prince of Wales-Hyder Census Area", "Prince of Wales-Outer Ketchikan Census Area", "Skagway-Hoonah-Angoon Census Area", "Hoonah-Angoon Census Area", "Skagway Municipality", "Petersburg Borough", "Petersburg Census Area", "Wrangell-Petersburg Census Area") | inlist("Wrangell City and Borough", "Wrangell Borough/city", "Petersburg Borough/Census Area")
+drop if county == "Bedford city"
+drop if county == "Kalawao County"
+drop if county == "Skagway Municipality"
+drop if county == "Prince of Wales-Hyder Census Area"
+drop if county == "Prince of Wales-Outer Ketchikan Census Area"
+drop if county == "Skagway Hoonah-Angoon Census Area"
+drop if county == "Hoonah-Angoon Census Area"
+drop if county == "Petersburg Borough"
+drop if county == "Petersburg Census Area"
+drop if county == "Wrangell-Petersburg Census Area"
+drop if county == "Wrangell City and Borough"
+drop if county == "Wrangell Borough/city"
+drop if county == "Petersburg Borough/Census Area"
 	* Save Dataset
 	save "`dataset'_200_18to64"
 	clear
@@ -162,5 +200,5 @@ merge 1:1 county state year using SAHIE_200_18to64
 drop _merge
 
 * Save Dataset
-save SAHIE
+save "$root_final/SAHIE.dta"
 clear
