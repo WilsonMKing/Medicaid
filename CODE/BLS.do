@@ -2,11 +2,10 @@
 ****************** BUREAU OF LABOR STATISTICS (BLS) ******************
 **********************************************************************
 
-global user = "wilsonking"
-global root = "/Users/$user/Documents/Github/Medicaid"
+cd "$root_data"
 
 foreach year in 08 09 10 11 12 13 14 15 16 17 18 19 {
-	import excel "/$file_path_root/RAW DATA/laucnty`year'.xlsx", sheet("laucnty`year'") firstrow
+	import excel "laucnty`year'.xlsx", sheet("laucnty`year'") firstrow
 	save "BLS_`year'"
 	clear
 }
@@ -37,6 +36,7 @@ rename Year year
 
 destring state_fips county_fips year, replace
 
+replace post_code = "DC" if county == "District of Columbia"
 replace county = "San Francisco County" if county == "San Francisco County/city"
 replace county = "Honolulu County" if county == "Honolulu County/city"
 replace county = "Juneau City and Borough" if county == "Juneau Borough/city"
@@ -48,8 +48,19 @@ replace county = "Doña Ana County" if county == "Dona Ana County"
 replace county = "Denver County" if county == "Denver County/city"
 replace county = "Broomfield County" if county == "Broomfield County/city"
 replace county = "Anchorage Municipality" if county == "Anchorage Borough/municipality"
+drop if county == "Bedford city"
+drop if county == "Kalawao County"
+drop if county == "Skagway Municipality"
+drop if county == "Prince of Wales-Hyder Census Area"
+drop if county == "Prince of Wales-Outer Ketchikan Census Area"
+drop if county == "Skagway-Hoonah-Angoon Census Area"
+drop if county == "Hoonah-Angoon Census Area"
+drop if county == "Petersburg Borough"
+drop if county == "Petersburg Census Area"
+drop if county == "Wrangell-Petersburg Census Area"
+drop if county == "Wrangell City and Borough"
+drop if county == "Wrangell Borough/city"
+drop if county == "Petersburg Borough/Census Area"
 
-drop if inlist(county, "Prince of Wales-Hyder Census Area", "Prince of Wales-Outer Ketchikan Census Area", "Skagway-Hoonah-Angoon Census Area" "Hoonah-Angoon Census Area" "Skagway Municipality" "Petersburg Borough" "Wrangell-Petersburg Census Area" "Wrangell City and Borough" "Wrangell Borough/city" "Petersburg Borough/Census Area")
-
-save "BLS"
+save "$root_final/BLS"
 clear

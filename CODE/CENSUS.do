@@ -2,14 +2,13 @@
 ******************* U.S Census Bureau Demographics *******************
 **********************************************************************
 
-global user = "wilsonking"
-global root = "/Users/$user/Documents/Github/Medicaid"
+cd "$root_data"
 
 * Import Datasets for 2000-2009
 
 	* 2009 By State
 foreach state in 01 02 04 05 06 08 09 10 11 12 13 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 44 45 46 47 48 49 50 51 53 54 55 56 {
-	import delimited "$file_path_root/RAW DATA/cc-est2009-alldata-`state'.csv"
+	import delimited "cc-est2009-alldata-`state'.csv"
 	save "CENSUS_`state'"
 	clear
 }
@@ -50,7 +49,7 @@ save "CENSUS_2009"
 clear
 
 * Import Dataset - Demographics (Whole Population)
-import delimited "$file_path_root/RAW DATA/cc-est2019-alldata.csv", encoding(ISO-8859-9)
+import delimited "cc-est2019-alldata.csv", encoding(ISO-8859-9)
 
 	* Drop All Years Not in Panel
 drop if year < 3
@@ -97,9 +96,19 @@ replace county = "Philadelphia County" if county == "Philadelphia County/city"
 replace county = "San Francisco County" if county == "San Francisco County/city"
 replace county = "Sitka City and Borough" if county == "Sitka Borough/city"
 replace county = "Yakutat City and Borough" if county == "Yakutat Borough/city"
-
-drop if inlist(county, "Bedford city", "Skagway Municipality", "Prince of Wales-Hyder Census Area", "Prince of Wales-Outer Ketchikan Census Area", "Skagway-Hoonah-Angoon Census Area")
-drop if inlist(county, "Hoonah-Angoon Census Area", "Skagway Municipality", "Petersburg Borough","Petersburg Census Area", "Wrangell-Petersburg Census Area", "Wrangell City and Borough", "Wrangell Borough/city", "Petersburg Borough/Census Area")
+drop if county == "Kalawao County"
+drop if county == "Bedford city"
+drop if county == "Skagway Municipality"
+drop if county == "Prince of Wales-Hyder Census Area"
+drop if county == "Prince of Wales-Outer Ketchikan Census Area"
+drop if county == "Skagway Hoonah-Angoon Census Area"
+drop if county == "Hoonah-Angoon Census Area"
+drop if county == "Petersburg Borough"
+drop if county == "Petersburg Census Area"
+drop if county == "Wrangell-Petersburg Census Area"
+drop if county == "Wrangell City and Borough"
+drop if county == "Wrangell Borough/city"
+drop if county == "Petersburg Borough/Census Area"
 
 	* Save Full Census Dataset from 2000-2019
 save "CENSUS_2000_2019"
@@ -184,18 +193,11 @@ clear
 	* Use Full Dataset
 use CENSUS_FULL
 
-	* Merge Under 65 Dataset
-merge 1:1 state county year using CENSUS_UNDER65
-drop _merge
-
-	* Merge Over 65 Dataset
-merge 1:1 state county year using CENSUS_OVER65
-drop _merge
-
-	* Merge 20-65 Dataset
-merge 1:1 state county year using CENSUS_20to65
-drop _merge
+foreach i in UNDER65 OVER65 20to65 {
+	merge 1:1 state county year using CENSUS_`i'
+	drop _merge
+}
 
 * Save Final Census Dataset
-save "$file_path_root/RAW DATA/CENSUS"
+save "$root_final/CENSUS.dta"
 clear
