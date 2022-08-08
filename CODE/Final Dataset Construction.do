@@ -186,8 +186,12 @@ label variable pct_tot_pop_20to65 "% Aged 20-65"
 label variable pctui "% Uninsured"
 label variable unemployment_rate "Unemployment Rate (%)"
 label variable med_house_income "Median Household Income ($)"
-label variable cruderate_25to64_diff "Annual Change in All Cause Mortality per 100,000"
-label variable adjrate_25to64_diff "Annual Change in Age Adjusted All Cause Mortality per 100,000"
+label variable pctui_200_18to64 "% Uninsured, 18-64 & <200% of FPL"
+label variable adjrate_25to64 "Age Adjusted Mortality, 25-64 (per 100,000)"
+label variable adjrate_25to64_men "Age Adjusted Mortality, Men 25-64 (per 100,000)"
+label variable adjrate_25to64_women "Age Adjusted Mortality, Women 25-64 (per 100,000)"
+label variable adjrate_25to64_amenable "Age Adjusted Amenable Mortality, 25-64 (per 100,000)"
+label variable adjrate_25to64_circulatory "Age Adjusted Circulatory Mortality, 25-64 (per 100,000)"
 
 * Save Dataset
 save, replace
