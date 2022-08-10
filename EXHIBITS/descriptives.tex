@@ -2,25 +2,24 @@
 \def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
 \begin{tabular}{l*{3}{cccc}}
 \hline\hline
-                    &\multicolumn{2}{c}{(1)}  &\multicolumn{2}{c}{(2)}  &\multicolumn{1}{c}{(3)}\\
-                    &\multicolumn{2}{c}{}     &\multicolumn{2}{c}{}     &\multicolumn{1}{c}{} \\
-                    &        mean&          sd&        mean&          sd&           b         \\
+                    &\multicolumn{2}{c}{(1)}  &\multicolumn{2}{c}{(2)}  &\multicolumn{2}{c}{(3)}           \\
+                    &\multicolumn{2}{c}{Non-Expansion Counties}&\multicolumn{2}{c}{Expansion Counties}&\multicolumn{2}{c}{Difference}    \\
+                    &        mean&          sd&        mean&          sd&          sd&           b         \\
 \hline
-% Female            &       50.25&        2.31&       50.15&        2.05&        0.08\sym{**} \\
-% Black             &       13.09&       17.12&        6.57&       11.05&        6.39\sym{***}\\
-% Hispanic          &        9.77&       14.93&        6.17&       10.44&        3.98\sym{***}\\
-% Aged 20-65        &       57.20&        3.47&       58.73&        3.32&       -1.28\sym{***}\\
-% Uninsured, 18-64 & <200% of FPL               &       40.54&        8.32&       34.44&        7.88&        9.69\sym{***}\\
-Unemployment Rate (%)&        5.67&        2.29&        6.01&        1.96&       -0.28\sym{***}\\
-Median Household Income ($)&    41264.87&     9268.19&    46582.20&    12505.02&    -5640.65\sym{***}\\
-Age Adjusted Mortality, 25-64 (per 100,000)&      443.08&      121.86&      370.31&      118.61&       71.11\sym{***}\\
-Age Adjusted Mortality, Men 25-64 (per 100,000)&      566.38&      161.52&      467.29&      160.07&       91.31\sym{***}\\
-Age Adjusted Mortality, Women 25-64 (per 100,000)&      342.86&      100.10&      277.53&       91.80&       62.55\sym{***}\\
-Age Adjusted Circulatory Mortality, 25-64 (per 100,000)&      119.00&       45.43&       89.45&       36.67&       32.51\sym{***}\\
-Age Adjusted Amenable Mortality, 25-64 (per 100,000)&      356.19&      101.20&      290.41&       89.89&       65.74\sym{***}\\
-Annual Change in Age Adjusted All Cause Mortality per 100,000&           .&           .&           .&           .&       -0.28         \\
+% Female            &       50.25&      (2.31)&       50.15&      (2.05)&            &        0.10         \\
+% Black             &       13.09&     (17.12)&        6.57&     (11.05)&            &        6.52\sym{***}\\
+% Hispanic          &        9.77&     (14.93)&        6.17&     (10.44)&            &        3.60\sym{***}\\
+% Aged 20-65        &       57.20&      (3.47)&       58.73&      (3.32)&            &       -1.53\sym{***}\\
+% Uninsured, 18-64 & <200% of FPL&       40.54&      (8.32)&       34.44&      (7.88)&            &        6.10\sym{***}\\
+Unemployment Rate (%)&        5.67&      (2.29)&        6.01&      (1.96)&            &       -0.35\sym{***}\\
+Median Household Income ($)&    41264.87&   (9268.19)&    46582.20&  (12505.02)&            &    -5317.33\sym{***}\\
+Age Adjusted Mortality, 25-64 (per 100,000)&      443.08&    (121.86)&      370.31&    (118.61)&            &       72.77\sym{***}\\
+Age Adjusted Mortality, Men 25-64 (per 100,000)&      566.38&    (161.52)&      467.29&    (160.07)&            &       99.09\sym{***}\\
+Age Adjusted Mortality, Women 25-64 (per 100,000)&      342.86&    (100.10)&      277.53&     (91.80)&            &       65.33\sym{***}\\
+Age Adjusted Circulatory Mortality, 25-64 (per 100,000)&      119.00&     (45.43)&       89.45&     (36.67)&            &       29.55\sym{***}\\
+Age Adjusted Amenable Mortality, 25-64 (per 100,000)&      356.19&    (101.20)&      290.41&     (89.89)&            &       65.79\sym{***}\\
 \hline
-Observations        &        1422&            &        1714&            &       37632         \\
+Observations        &        1422&            &        1714&            &        3136&                     \\
 \hline\hline
 \end{tabular}
 }
